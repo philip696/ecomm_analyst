@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3508" height="2480" viewBox="0 0 3508 2480" role="img" aria-labelledby="title desc">
+  <title id="title">Ecomm Analyst Data Pipeline Architecture</title>
+  <desc id="desc">A4 landscape architecture diagram showing API and manual input flowing through data cleaning into backend, frontend, and AI analysis.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5fbff"/>
+      <stop offset="100%" stop-color="#eff9f2"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+
+    <marker id="arrow" markerWidth="16" markerHeight="12" refX="14" refY="6" orient="auto">
+      <path d="M0,0 L16,6 L0,12 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="3508" height="2480" fill="url(#bg)"/>
+
+  <text x="1754" y="145" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="84" font-weight="700" fill="#0f172a">
+    Ecomm Analyst - Data Pipeline Architecture
+  </text>
+  <text x="1754" y="215" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="38" fill="#334155">
+    A4 Landscape for PowerPoint (3508 x 2480)
+  </text>
+
+  <!-- Inputs Group -->
+  <g filter="url(#shadow)">
+    <rect x="120" y="420" width="760" height="1520" rx="28" fill="#fff1e6" stroke="#ea7a27" stroke-width="6"/>
+  </g>
+  <text x="500" y="515" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="700" fill="#7c2d12">Data Inputs</text>
+
+  <rect x="220" y="650" width="560" height="240" rx="20" fill="#fff9f4" stroke="#fb923c" stroke-width="4"/>
+  <text x="500" y="740" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="700" fill="#9a3412">External APIs</text>
+  <text x="500" y="795" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#b45309">Marketplace / Partner Feeds</text>
+
+  <rect x="220" y="980" width="560" height="240" rx="20" fill="#fff9f4" stroke="#fb923c" stroke-width="4"/>
+  <text x="500" y="1070" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="700" fill="#9a3412">Manual User Input</text>
+  <text x="500" y="1125" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#b45309">CSV upload / form entry</text>
+
+  <rect x="220" y="1310" width="560" height="240" rx="20" fill="#fff9f4" stroke="#fb923c" stroke-width="4"/>
+  <text x="500" y="1400" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="700" fill="#9a3412">Ingestion API</text>
+  <text x="500" y="1455" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#b45309">FastAPI endpoints receive data</text>
+
+  <!-- Data Processing + Storage Group -->
+  <g filter="url(#shadow)">
+    <rect x="980" y="320" width="1220" height="1820" rx="28" fill="#e7f7e5" stroke="#2e8b57" stroke-width="6"/>
+  </g>
+  <text x="1590" y="415" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="700" fill="#14532d">Data Processing and Storage</text>
+
+  <rect x="1080" y="560" width="1020" height="210" rx="20" fill="#f4fff2" stroke="#4ade80" stroke-width="4"/>
+  <text x="1590" y="645" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700" fill="#166534">Raw Database</text>
+  <text x="1590" y="700" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#15803d">Store incoming records (API + manual input)</text>
+
+  <rect x="1080" y="860" width="1020" height="340" rx="20" fill="#f4fff2" stroke="#4ade80" stroke-width="4"/>
+  <text x="1590" y="950" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700" fill="#166534">Cleaning and Validation Pipeline</text>
+  <text x="1590" y="1010" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#15803d">Normalize fields, deduplicate, handle nulls, type checks</text>
+  <text x="1590" y="1060" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#15803d">Sentiment labels and derived analytics metrics</text>
+  <text x="1590" y="1110" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#15803d">Ready for dashboard and AI consumption</text>
+
+  <rect x="1080" y="1290" width="1020" height="210" rx="20" fill="#f4fff2" stroke="#4ade80" stroke-width="4"/>
+  <text x="1590" y="1375" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700" fill="#166534">Curated Analytics Database</text>
+  <text x="1590" y="1430" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#15803d">Clean datasets used by backend, frontend, and AI</text>
+
+  <rect x="1080" y="1590" width="1020" height="210" rx="20" fill="#f4fff2" stroke="#4ade80" stroke-width="4"/>
+  <text x="1590" y="1675" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700" fill="#166534">SQLAlchemy Models + ORM</text>
+  <text x="1590" y="1730" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#15803d">Consistent data access for application services</text>
+
+  <!-- App + AI Group -->
+  <g filter="url(#shadow)">
+    <rect x="2300" y="420" width="1088" height="1720" rx="28" fill="#dff1ff" stroke="#2f6fdb" stroke-width="6"/>
+  </g>
+  <text x="2844" y="515" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="700" fill="#1e3a8a">Application and AI Layer</text>
+
+  <rect x="2400" y="650" width="420" height="300" rx="20" fill="#f1f8ff" stroke="#60a5fa" stroke-width="4"/>
+  <text x="2610" y="745" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700" fill="#1e40af">Backend</text>
+  <text x="2610" y="800" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#1d4ed8">FastAPI</text>
+  <text x="2610" y="845" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#1d4ed8">Routers + Auth</text>
+
+  <rect x="2860" y="650" width="420" height="300" rx="20" fill="#fff7f1" stroke="#fb923c" stroke-width="4"/>
+  <text x="3070" y="745" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700" fill="#9a3412">Frontend</text>
+  <text x="3070" y="800" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#b45309">Next.js Dashboard</text>
+  <text x="3070" y="845" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#b45309">Charts and Tables</text>
+
+  <rect x="2400" y="1060" width="880" height="360" rx="20" fill="#fff7cc" stroke="#b38b00" stroke-width="4"/>
+  <text x="2840" y="1150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="700" fill="#713f12">AI Analysis Engine</text>
+  <text x="2840" y="1210" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#854d0e">Analyzes cleaned sales, engagement, and comment data</text>
+  <text x="2840" y="1260" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#854d0e">Generates insights and recommendations</text>
+  <text x="2840" y="1310" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#854d0e">OpenAI model with mock fallback support</text>
+
+  <rect x="2400" y="1520" width="880" height="300" rx="20" fill="#f8fafc" stroke="#94a3b8" stroke-width="4"/>
+  <text x="2840" y="1605" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700" fill="#334155">Displayed to Users</text>
+  <text x="2840" y="1665" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#475569">Backend API responses + Frontend dashboard visuals</text>
+  <text x="2840" y="1715" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#475569">Includes AI-generated insight cards and history</text>
+
+  <!-- Main flow arrows -->
+  <line x1="780" y1="770" x2="980" y2="665" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="780" y1="1100" x2="980" y2="665" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="780" y1="1430" x2="980" y2="665" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+
+  <line x1="1590" y1="770" x2="1590" y2="860" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="1590" y1="1200" x2="1590" y2="1290" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="1590" y1="1500" x2="1590" y2="1590" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+
+  <line x1="2100" y1="1395" x2="2400" y2="800" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="2100" y1="1395" x2="2860" y2="800" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="2100" y1="1395" x2="2400" y2="1240" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+
+  <line x1="2610" y1="950" x2="2610" y2="1060" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="3070" y1="950" x2="2920" y2="1060" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+
+  <line x1="2840" y1="1420" x2="2840" y2="1520" stroke="#4b5563" stroke-width="6" marker-end="url(#arrow)"/>
+
+  <!-- Labels -->
+  <text x="900" y="920" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#374151">ingest</text>
+  <text x="2160" y="890" text-anchor="start" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#374151">cleaned data to apps</text>
+  <text x="2860" y="1000" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#374151">analyze</text>
+
+  <!-- Footer -->
+  <text x="1754" y="2390" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#475569">
+    Flow: API / Manual Input -> Database -> Cleaning -> Backend + Frontend + AI Analysis
+  </text>
+</svg>
