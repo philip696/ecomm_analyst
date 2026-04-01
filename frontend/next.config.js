@@ -9,8 +9,8 @@ const nextConfig = {
     NEXT_PUBLIC_APP_NAME: 'MarketLens',
   },
   
-  // Cloudflare Pages compatibility - use 'standalone' for server-side rendering
-  output: 'standalone',
+  // Cloudflare Pages compatibility - static export
+  output: 'export',
   
   // Image optimization
   images: {
