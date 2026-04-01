@@ -4,8 +4,14 @@
  */
 import axios from "axios";
 
+const resolvedBaseUrl = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV !== "production" ? "http://localhost:8000" : "");
+
+if (!resolvedBaseUrl) {
+  throw new Error("NEXT_PUBLIC_API_URL must be set for production builds.");
+}
+
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000",
+  baseURL: resolvedBaseUrl,
 });
 
 // Attach token on every request

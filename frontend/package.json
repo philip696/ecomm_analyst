@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
+    "build:cf": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:cf": "wrangler pages deploy .next",
+    "deploy:docker": "docker build -t marketlens-frontend:latest . && docker run -p 3000:3000 marketlens-frontend:latest"
   },
   "dependencies": {
     "next": "14.2.3",

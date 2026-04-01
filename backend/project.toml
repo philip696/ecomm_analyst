@@ -1,0 +1,5 @@
+[build]
+builder = "paketobuildpacks/builder:base"
+
+[env]
+BP_PYTHON_VERSION = "3.13"

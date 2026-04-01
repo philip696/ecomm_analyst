@@ -1,0 +1,47 @@
+name = "marketlens"
+type = "javascript"
+account_id = "YOUR_ACCOUNT_ID"
+workers_dev = true
+route = "api.marketlens.com/*"
+zone_id = "YOUR_ZONE_ID"
+
+# Cloudflare Pages configuration
+pages_build_output_dir = "frontend/.next"
+
+[env.production]
+name = "marketlens-prod"
+routes = [
+  { pattern = "api.marketlens.com/*", zone_id = "YOUR_ZONE_ID" }
+]
+
+[env.staging]
+name = "marketlens-staging"
+routes = [
+  { pattern = "api-staging.marketlens.com/*", zone_id = "YOUR_ZONE_ID" }
+]
+
+# Environment variables
+[env.production.vars]
+BACKEND_URL = "https://api.marketlens.com"
+API_BASE = "https://api.marketlens.com"
+
+[env.staging.vars]
+BACKEND_URL = "https://api-staging.marketlens.com"
+API_BASE = "https://api-staging.marketlens.com"
+
+# KV Namespaces for caching
+[[kv_namespaces]]
+binding = "CACHE"
+id = "YOUR_KV_ID"
+preview_id = "YOUR_KV_PREVIEW_ID"
+
+# Durable Objects (for real-time features)
+[[durable_objects.bindings]]
+name = "SESSION_STORE"
+class_name = "SessionStore"
+script_name = "marketlens"
+
+# Build configuration
+[build]
+command = "npm run build:cf"
+cwd = "./"

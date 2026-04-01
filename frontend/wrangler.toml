@@ -1,0 +1,46 @@
+# Cloudflare Pages Configuration
+
+name = "marketlens-frontend"
+production_branch = "main"
+
+[build]
+command = "npm run build"
+functions_dir = "frontend/functions"
+output_dir = "frontend/.next"
+
+[build.environment]
+NODE_VERSION = "22.16.0"
+NPM_VERSION = "10"
+
+[env.production]
+deployment_controls = {
+  preview_deployment_setting = "custom",
+  preview_deployment_custom_domain = "preview.marketlens.com"
+}
+
+[env.staging]
+deployment_controls = {
+  preview_deployment_setting = "none"
+}
+
+[[routes]]
+pattern = "marketlens.com/*"
+zone_name = "marketlens.com"
+
+[[routes]]
+pattern = "www.marketlens.com/*"
+zone_name = "marketlens.com"
+
+# Redirects
+[[redirects]]
+path = "/*"
+status = 200
+destination = "/index.html"
+
+# Headers
+[[headers]]
+path = "/api/*"
+[headers.values]
+"Access-Control-Allow-Origin" = "*"
+"Access-Control-Allow-Methods" = "GET, POST, PUT, DELETE, OPTIONS"
+"Cache-Control" = "no-cache, no-store, must-revalidate"

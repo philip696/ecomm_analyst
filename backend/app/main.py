@@ -6,11 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.database import Base, engine
 from app.routers import auth, comments, dashboard, engagement, insights, products, sales
-
-# Create all tables on startup (fine for SQLite/dev; use Alembic for production)
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="E-Commerce Analytics API",
@@ -21,7 +17,7 @@ app = FastAPI(
 # ── CORS ──────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.FRONTEND_URL, "http://localhost:3000"],
+    allow_origins=settings.allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -40,3 +36,9 @@ app.include_router(insights.router)
 @app.get("/", tags=["health"])
 def root():
     return {"status": "ok", "message": "E-Commerce Analytics API is running"}
+
+
+@app.get("/health", tags=["health"])
+def health_check():
+    """Health check endpoint for deployment monitoring"""
+    return {"status": "healthy", "service": "marketlens-api"}
