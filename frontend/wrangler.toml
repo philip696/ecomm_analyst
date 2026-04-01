@@ -1,34 +1,13 @@
 # Cloudflare Pages Configuration
-# Deploy with: npm run build && wrangler pages deploy .next
-# Or configure in Cloudflare Dashboard → Pages → Connect to Git
+# This file is optional - configuration is typically done in Cloudflare Dashboard
+# But can be used for local wrangler pages dev/deploy
 
 name = "marketlens"
-type = "javascript"
 compatibility_date = "2026-04-01"
 
-# Build configuration
 [build]
 command = "npm run build"
 cwd = "."
-watch_paths = ["src/**/*.tsx"]
 
 [build.upload]
-format = "modules"
-
-[env.production]
-name = "marketlens-production"
-compatibility_date = "2026-04-01"
-
-[env.production.vars]
-NEXT_PUBLIC_API_URL = "https://api.marketlens.com"
-NEXT_PUBLIC_APP_NAME = "MarketLens"
-NODE_ENV = "production"
-
-[env.staging]
-name = "marketlens-staging"
-compatibility_date = "2026-04-01"
-
-[env.staging.vars]
-NEXT_PUBLIC_API_URL = "https://staging-api.marketlens.com"
-NEXT_PUBLIC_APP_NAME = "MarketLens (Staging)"
-NODE_ENV = "development"
+format = "service-worker"

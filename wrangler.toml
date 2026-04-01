@@ -1,22 +1,2 @@
-# Cloudflare Workers Configuration (Optional - for API proxy)
-# This is optional. If using this, deploy with: wrangler deploy
-# Otherwise use Cloudflare Pages dashboard for frontend deployment
-
-name = "marketlens-api-proxy"
-type = "javascript"
-compatibility_date = "2026-04-01"
-
-# Worker script to proxy API requests
-main = "src/worker.ts"
-
-[env.production]
-name = "marketlens-api-proxy-prod"
-route = { pattern = "api.marketlens.com/*", zone_id = "YOUR_ZONE_ID" }
-
-[env.production.vars]
-BACKEND_URL = "https://your-backend-api.com"
-
-[[kv_namespaces]]
-binding = "CACHE"
-id = "YOUR_KV_ID"
-preview_id = "YOUR_KV_PREVIEW_ID"
+# Use frontend/wrangler.toml instead
+# This is kept minimal to avoid interference with Cloudflare Pages build
