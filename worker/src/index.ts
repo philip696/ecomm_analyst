@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import jwt from 'jsonwebtoken';
+import * as jwt from '@tsndr/cloudflare-worker-jwt';
 
 // Initialize Hono app
 const app = new Hono();
@@ -29,10 +29,9 @@ app.post('/api/auth/login', async (c) => {
   const password = body.get('password');
 
   if (username === DEMO_USER.email && password === 'demo1234') {
-    const token = jwt.sign(
+    const token = await jwt.sign(
       { sub: DEMO_USER.id },
-      JWT_SECRET,
-      { expiresIn: '7d' }
+      JWT_SECRET
     );
     return c.json({ access_token: token, token_type: 'bearer' });
   }
