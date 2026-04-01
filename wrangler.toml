@@ -1,2 +1,4 @@
-# Use frontend/wrangler.toml instead
-# This is kept minimal to avoid interference with Cloudflare Pages build
+# Cloudflare Pages configuration
+# This file is required for Pages deployments
+
+pages_build_output_dir = "frontend/.next"
