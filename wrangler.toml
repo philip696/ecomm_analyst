@@ -1,47 +1,22 @@
-name = "marketlens"
-type = "javascript"
-account_id = "YOUR_ACCOUNT_ID"
-workers_dev = true
-route = "api.marketlens.com/*"
-zone_id = "YOUR_ZONE_ID"
+# Cloudflare Workers Configuration (Optional - for API proxy)
+# This is optional. If using this, deploy with: wrangler deploy
+# Otherwise use Cloudflare Pages dashboard for frontend deployment
 
-# Cloudflare Pages configuration
-pages_build_output_dir = "frontend/.next"
+name = "marketlens-api-proxy"
+type = "javascript"
+compatibility_date = "2026-04-01"
+
+# Worker script to proxy API requests
+main = "src/worker.ts"
 
 [env.production]
-name = "marketlens-prod"
-routes = [
-  { pattern = "api.marketlens.com/*", zone_id = "YOUR_ZONE_ID" }
-]
+name = "marketlens-api-proxy-prod"
+route = { pattern = "api.marketlens.com/*", zone_id = "YOUR_ZONE_ID" }
 
-[env.staging]
-name = "marketlens-staging"
-routes = [
-  { pattern = "api-staging.marketlens.com/*", zone_id = "YOUR_ZONE_ID" }
-]
-
-# Environment variables
 [env.production.vars]
-BACKEND_URL = "https://api.marketlens.com"
-API_BASE = "https://api.marketlens.com"
+BACKEND_URL = "https://your-backend-api.com"
 
-[env.staging.vars]
-BACKEND_URL = "https://api-staging.marketlens.com"
-API_BASE = "https://api-staging.marketlens.com"
-
-# KV Namespaces for caching
 [[kv_namespaces]]
 binding = "CACHE"
 id = "YOUR_KV_ID"
 preview_id = "YOUR_KV_PREVIEW_ID"
-
-# Durable Objects (for real-time features)
-[[durable_objects.bindings]]
-name = "SESSION_STORE"
-class_name = "SessionStore"
-script_name = "marketlens"
-
-# Build configuration
-[build]
-command = "npm run build:cf"
-cwd = "./"

@@ -1,46 +1,34 @@
 # Cloudflare Pages Configuration
+# Deploy with: npm run build && wrangler pages deploy .next
+# Or configure in Cloudflare Dashboard → Pages → Connect to Git
 
-name = "marketlens-frontend"
-production_branch = "main"
+name = "marketlens"
+type = "javascript"
+compatibility_date = "2026-04-01"
 
+# Build configuration
 [build]
 command = "npm run build"
-functions_dir = "frontend/functions"
-output_dir = "frontend/.next"
+cwd = "."
+watch_paths = ["src/**/*.tsx"]
 
-[build.environment]
-NODE_VERSION = "22.16.0"
-NPM_VERSION = "10"
+[build.upload]
+format = "modules"
 
 [env.production]
-deployment_controls = {
-  preview_deployment_setting = "custom",
-  preview_deployment_custom_domain = "preview.marketlens.com"
-}
+name = "marketlens-production"
+compatibility_date = "2026-04-01"
+
+[env.production.vars]
+NEXT_PUBLIC_API_URL = "https://api.marketlens.com"
+NEXT_PUBLIC_APP_NAME = "MarketLens"
+NODE_ENV = "production"
 
 [env.staging]
-deployment_controls = {
-  preview_deployment_setting = "none"
-}
+name = "marketlens-staging"
+compatibility_date = "2026-04-01"
 
-[[routes]]
-pattern = "marketlens.com/*"
-zone_name = "marketlens.com"
-
-[[routes]]
-pattern = "www.marketlens.com/*"
-zone_name = "marketlens.com"
-
-# Redirects
-[[redirects]]
-path = "/*"
-status = 200
-destination = "/index.html"
-
-# Headers
-[[headers]]
-path = "/api/*"
-[headers.values]
-"Access-Control-Allow-Origin" = "*"
-"Access-Control-Allow-Methods" = "GET, POST, PUT, DELETE, OPTIONS"
-"Cache-Control" = "no-cache, no-store, must-revalidate"
+[env.staging.vars]
+NEXT_PUBLIC_API_URL = "https://staging-api.marketlens.com"
+NEXT_PUBLIC_APP_NAME = "MarketLens (Staging)"
+NODE_ENV = "development"
