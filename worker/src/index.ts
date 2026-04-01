@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import * as jwt from '@tsndr/cloudflare-worker-jwt';
+import { SignJWT } from 'jose';
 
 // Initialize Hono app
 const app = new Hono();
@@ -13,7 +13,8 @@ app.use(cors({
 }));
 
 // Constants
-const JWT_SECRET = 'your-secret-key-change-in-production';
+const JWT_SECRET = 'your-secret-key-change-in-production-this-should-be-at-least-32-chars-long';
+const SECRET_KEY = new TextEncoder().encode(JWT_SECRET);
 const DEMO_USER = {
   id: '1',
   email: 'demo@example.com',
@@ -29,10 +30,10 @@ app.post('/api/auth/login', async (c) => {
   const password = body.get('password');
 
   if (username === DEMO_USER.email && password === 'demo1234') {
-    const token = await jwt.sign(
-      { sub: DEMO_USER.id },
-      JWT_SECRET
-    );
+    const token = await new SignJWT({ sub: DEMO_USER.id })
+      .setProtectedHeader({ alg: 'HS256' })
+      .setExpirationTime('7d')
+      .sign(SECRET_KEY);
     return c.json({ access_token: token, token_type: 'bearer' });
   }
 
