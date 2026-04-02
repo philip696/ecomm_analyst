@@ -25,25 +25,19 @@ const DEMO_USER = {
 // ─── Auth Endpoints ───────────────────────────────────────
 
 app.post('/api/auth/login', async (c) => {
-  try {
-    const body = await c.req.parseFormData();
-    const username = body.get('username');
-    const password = body.get('password');
+  const body = await c.req.parseFormData();
+  const username = body.get('username');
+  const password = body.get('password');
 
-    if (username === DEMO_USER.email && password === 'demo1234') {
-      const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
-      const token = await new SignJWT({ sub: DEMO_USER.id })
-        .setProtectedHeader({ alg: 'HS256' })
-        .setExpirationTime(expiresAt)
-        .sign(SECRET_KEY);
-      return c.json({ access_token: token, token_type: 'bearer' });
-    }
-
-    return c.json({ detail: 'Incorrect credentials' }, 401);
-  } catch (error) {
-    console.error('Login error:', error);
-    return c.json({ detail: 'Login failed' }, 500);
+  if (username === DEMO_USER.email && password === 'demo1234') {
+    const token = await new SignJWT({ sub: DEMO_USER.id })
+      .setProtectedHeader({ alg: 'HS256' })
+      .setExpirationTime('7d')
+      .sign(SECRET_KEY);
+    return c.json({ access_token: token, token_type: 'bearer' });
   }
+
+  return c.json({ detail: 'Incorrect credentials' }, 401);
 });
 
 app.post('/api/auth/register', async (c) => {
@@ -278,7 +272,7 @@ app.get('/health', (c) => {
 });
 
 app.get('/', (c) => {
-  return c.json({ status: 'ok', message: 'E-Commerce Analytics API is running' });
+  return c.json({ status: 'ok', message: 'E-Commerce Analytics API is running (v2)' });
 });
 
 export default app;
