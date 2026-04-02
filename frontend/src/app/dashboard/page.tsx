@@ -14,11 +14,32 @@ import { dashboardApi, salesApi, engagementApi, commentsApi } from "@/lib/api";
 
 const COLORS = ["#4f6ef7", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
 
+// Type definitions for API responses
+interface SalesTrendItem {
+  date: string;
+  sales: number;
+  orders: number;
+  revenue: number;
+}
+
+interface SentimentItem {
+  sentiment: string;
+  count: number;
+  percentage: number;
+}
+
+interface EngagementTrendItem {
+  date: string;
+  views: number;
+  clicks: number;
+  engagement_rate: string | number;
+}
+
 export default function DashboardPage() {
   const [summary, setSummary] = useState<Record<string, number>>({});
-  const [salesTrend, setSalesTrend] = useState<Array<Record<string, any>>>([]);
-  const [sentiment, setSentiment] = useState<Array<Record<string, any>>>([]);
-  const [engagementTrend, setEngagementTrend] = useState<Array<Record<string, any>>>([]);
+  const [salesTrend, setSalesTrend] = useState<SalesTrendItem[]>([]);
+  const [sentiment, setSentiment] = useState<SentimentItem[]>([]);
+  const [engagementTrend, setEngagementTrend] = useState<EngagementTrendItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -149,7 +170,7 @@ export default function DashboardPage() {
                 label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                 labelLine={false}
               >
-                {sentiment.map((entry: { sentiment: string }, i) => (
+                {sentiment.map((entry, i) => (
                   <Cell
                     key={i}
                     fill={
