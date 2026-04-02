@@ -271,8 +271,21 @@ app.get('/health', (c) => {
   return c.json({ status: 'healthy', service: 'marketlens-api' });
 });
 
+app.get('/debug', (c) => {
+  return c.json({ 
+    status: 'debug', 
+    message: 'API is running',
+    routes: ['/api/auth/login', '/api/auth/register', '/api/auth/me', '/api/dashboard/summary', '/api/products/']
+  });
+});
+
 app.get('/', (c) => {
   return c.json({ status: 'ok', message: 'E-Commerce Analytics API is running (v2)' });
+});
+
+// Catch-all 404 handler
+app.all('*', (c) => {
+  return c.json({ error: 'Not Found', path: c.req.path, method: c.req.method }, 404);
 });
 
 export default app;
