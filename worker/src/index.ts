@@ -26,18 +26,34 @@ const DEMO_USER = {
 
 app.post('/api/auth/login', async (c) => {
   try {
-    const body = await c.req.parseFormData();
-    const username = body.get('username')?.toString();
-    const password = body.get('password')?.toString();
+    // Try to parse as JSON first, fallback to form data
+    let username = '';
+    let password = '';
+    
+    const contentType = c.req.header('content-type') || '';
+    if (contentType.includes('application/json')) {
+      const body = await c.req.json();
+      username = body.username || '';
+      password = body.password || '';
+    } else {
+      const body = await c.req.parseFormData();
+      username = body.get('username')?.toString() || '';
+      password = body.get('password')?.toString() || '';
+    }
 
     if (username === DEMO_USER.email && password === 'demo1234') {
-      // 7 days in seconds
-      const expirationTime = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60);
-      const token = await new SignJWT({ sub: DEMO_USER.id })
-        .setProtectedHeader({ alg: 'HS256' })
-        .setExpirationTime(expirationTime)
-        .sign(SECRET_KEY);
-      return c.json({ access_token: token, token_type: 'bearer' });
+      try {
+        // 7 days in seconds
+        const expirationTime = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60);
+        const token = await new SignJWT({ sub: DEMO_USER.id })
+          .setProtectedHeader({ alg: 'HS256' })
+          .setExpirationTime(expirationTime)
+          .sign(SECRET_KEY);
+        return c.json({ access_token: token, token_type: 'bearer' });
+      } catch (jwtError) {
+        console.error('JWT signing error:', jwtError);
+        return c.json({ detail: 'JWT error', error: String(jwtError) }, 500);
+      }
     }
 
     return c.json({ detail: 'Incorrect credentials' }, 401);
