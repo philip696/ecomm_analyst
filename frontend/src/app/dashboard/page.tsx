@@ -16,9 +16,9 @@ const COLORS = ["#4f6ef7", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
 
 export default function DashboardPage() {
   const [summary, setSummary] = useState<Record<string, number>>({});
-  const [salesTrend, setSalesTrend] = useState([]);
-  const [sentiment, setSentiment] = useState([]);
-  const [engagementTrend, setEngagementTrend] = useState([]);
+  const [salesTrend, setSalesTrend] = useState<Array<Record<string, any>>>([]);
+  const [sentiment, setSentiment] = useState<Array<Record<string, any>>>([]);
+  const [engagementTrend, setEngagementTrend] = useState<Array<Record<string, any>>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
