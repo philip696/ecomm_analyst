@@ -30,9 +30,11 @@ app.post('/api/auth/login', async (c) => {
   const password = body.get('password');
 
   if (username === DEMO_USER.email && password === 'demo1234') {
+    // 7 days in seconds
+    const expirationTime = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60);
     const token = await new SignJWT({ sub: DEMO_USER.id })
       .setProtectedHeader({ alg: 'HS256' })
-      .setExpirationTime('7d')
+      .setExpirationTime(expirationTime)
       .sign(SECRET_KEY);
     return c.json({ access_token: token, token_type: 'bearer' });
   }
