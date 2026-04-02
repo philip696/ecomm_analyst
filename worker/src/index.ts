@@ -25,21 +25,26 @@ const DEMO_USER = {
 // ─── Auth Endpoints ───────────────────────────────────────
 
 app.post('/api/auth/login', async (c) => {
-  const body = await c.req.parseFormData();
-  const username = body.get('username');
-  const password = body.get('password');
+  try {
+    const body = await c.req.parseFormData();
+    const username = body.get('username')?.toString();
+    const password = body.get('password')?.toString();
 
-  if (username === DEMO_USER.email && password === 'demo1234') {
-    // 7 days in seconds
-    const expirationTime = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60);
-    const token = await new SignJWT({ sub: DEMO_USER.id })
-      .setProtectedHeader({ alg: 'HS256' })
-      .setExpirationTime(expirationTime)
-      .sign(SECRET_KEY);
-    return c.json({ access_token: token, token_type: 'bearer' });
+    if (username === DEMO_USER.email && password === 'demo1234') {
+      // 7 days in seconds
+      const expirationTime = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60);
+      const token = await new SignJWT({ sub: DEMO_USER.id })
+        .setProtectedHeader({ alg: 'HS256' })
+        .setExpirationTime(expirationTime)
+        .sign(SECRET_KEY);
+      return c.json({ access_token: token, token_type: 'bearer' });
+    }
+
+    return c.json({ detail: 'Incorrect credentials' }, 401);
+  } catch (error) {
+    console.error('Login error:', error);
+    return c.json({ detail: 'Internal server error', error: String(error) }, 500);
   }
-
-  return c.json({ detail: 'Incorrect credentials' }, 401);
 });
 
 app.post('/api/auth/register', async (c) => {
