@@ -103,16 +103,13 @@ app.get('/api/dashboard/summary', (c) => {
 // ─── Products ─────────────────────────────────────────────
 
 app.get('/api/products/', (c) => {
-  return c.json({
-    data: [
-      { id: 1, name: 'Wireless Headphones', sku: 'WH-001', price: 49.99, marketplace: 'shopee' },
-      { id: 2, name: 'USB-C Cable', sku: 'USB-001', price: 12.99, marketplace: 'taobao' },
-      { id: 3, name: 'Phone Stand', sku: 'PS-001', price: 19.99, marketplace: 'temu' },
-      { id: 4, name: 'Screen Protector', sku: 'SP-001', price: 8.99, marketplace: 'shopee' },
-      { id: 5, name: 'Portable Charger', sku: 'PC-001', price: 34.99, marketplace: 'taobao' },
-    ],
-    total: 5,
-  });
+  return c.json([
+    { id: 1, name: 'Wireless Headphones', sku: 'WH-001', price: 49.99, marketplace: 'shopee' },
+    { id: 2, name: 'USB-C Cable', sku: 'USB-001', price: 12.99, marketplace: 'taobao' },
+    { id: 3, name: 'Phone Stand', sku: 'PS-001', price: 19.99, marketplace: 'temu' },
+    { id: 4, name: 'Screen Protector', sku: 'SP-001', price: 8.99, marketplace: 'shopee' },
+    { id: 5, name: 'Portable Charger', sku: 'PC-001', price: 34.99, marketplace: 'taobao' },
+  ]);
 });
 
 // ─── Sales Analytics ──────────────────────────────────────
@@ -130,49 +127,41 @@ app.get('/api/sales/analytics/trends', (c) => {
       revenue: Math.floor(Math.random() * 50000) + 10000,
     });
   }
-  return c.json({ data });
+  return c.json(data);
 });
 
 app.get('/api/sales/analytics/top-products', (c) => {
   const limit = c.req.query('limit') || '5';
-  return c.json({
-    data: [
-      { id: 1, name: 'Wireless Headphones', sales: 450, revenue: 22495 },
-      { id: 2, name: 'USB-C Cable', sales: 890, revenue: 11551 },
-      { id: 3, name: 'Phone Stand', sales: 234, revenue: 4677 },
-      { id: 4, name: 'Screen Protector', sales: 612, revenue: 5505 },
-      { id: 5, name: 'Portable Charger', sales: 178, revenue: 6239 },
-    ].slice(0, parseInt(limit as string)),
-  });
+  return c.json([
+    { id: 1, name: 'Wireless Headphones', sales: 450, revenue: 22495 },
+    { id: 2, name: 'USB-C Cable', sales: 890, revenue: 11551 },
+    { id: 3, name: 'Phone Stand', sales: 234, revenue: 4677 },
+    { id: 4, name: 'Screen Protector', sales: 612, revenue: 5505 },
+    { id: 5, name: 'Portable Charger', sales: 178, revenue: 6239 },
+  ].slice(0, parseInt(limit as string)));
 });
 
 app.get('/api/sales/analytics/most-returned', (c) => {
-  return c.json({
-    data: [
-      { id: 2, name: 'USB-C Cable', returns: 45, return_rate: 0.05 },
-      { id: 4, name: 'Screen Protector', returns: 23, return_rate: 0.04 },
-      { id: 1, name: 'Wireless Headphones', returns: 12, return_rate: 0.03 },
-    ],
-  });
+  return c.json([
+    { id: 2, name: 'USB-C Cable', returns: 45, return_rate: 0.05 },
+    { id: 4, name: 'Screen Protector', returns: 23, return_rate: 0.04 },
+    { id: 1, name: 'Wireless Headphones', returns: 12, return_rate: 0.03 },
+  ]);
 });
 
 app.get('/api/sales/analytics/bundled-items', (c) => {
-  return c.json({
-    data: [
-      { combo: 'Headphones + Cable', frequency: 234 },
-      { combo: 'Phone Stand + Protector', frequency: 156 },
-      { combo: 'Charger + Cable', frequency: 189 },
-    ],
-  });
+  return c.json([
+    { combo: 'Headphones + Cable', frequency: 234 },
+    { combo: 'Phone Stand + Protector', frequency: 156 },
+    { combo: 'Charger + Cable', frequency: 189 },
+  ]);
 });
 
 app.get('/api/sales/analytics/competitor-pricing', (c) => {
-  return c.json({
-    data: [
-      { competitor: 'Competitor A', price: 45.99, your_price: 49.99, difference: 4.0 },
-      { competitor: 'Competitor B', price: 52.99, your_price: 49.99, difference: -3.0 },
-    ],
-  });
+  return c.json([
+    { competitor: 'Competitor A', price: 45.99, your_price: 49.99, difference: 4.0 },
+    { competitor: 'Competitor B', price: 52.99, your_price: 49.99, difference: -3.0 },
+  ]);
 });
 
 // ─── Engagement Analytics ────────────────────────────────
@@ -190,84 +179,72 @@ app.get('/api/engagement/analytics/trends', (c) => {
       engagement_rate: (Math.random() * 10 + 2).toFixed(2),
     });
   }
-  return c.json({ data });
+  return c.json(data);
 });
 
 app.get('/api/engagement/analytics/top-viewed', (c) => {
-  return c.json({
-    data: [
-      { id: 1, name: 'Wireless Headphones', views: 12450 },
-      { id: 2, name: 'USB-C Cable', views: 9870 },
-      { id: 3, name: 'Phone Stand', views: 6234 },
-      { id: 4, name: 'Screen Protector', views: 5120 },
-      { id: 5, name: 'Portable Charger', views: 4567 },
-    ],
-  });
+  return c.json([
+    { id: 1, name: 'Wireless Headphones', views: 12450 },
+    { id: 2, name: 'USB-C Cable', views: 9870 },
+    { id: 3, name: 'Phone Stand', views: 7234 },
+    { id: 4, name: 'Screen Protector', views: 5890 },
+    { id: 5, name: 'Portable Charger', views: 4567 },
+  ]);
 });
 
 app.get('/api/engagement/analytics/image-views', (c) => {
-  return c.json({
-    data: [
-      { image: 'main-hero.jpg', views: 5600 },
-      { image: 'detail-1.jpg', views: 4123 },
-      { image: 'detail-2.jpg', views: 3890 },
-    ],
-  });
+  return c.json([
+    { product_id: 1, image_url: 'headphones-1.jpg', views: 8934 },
+    { product_id: 1, image_url: 'headphones-2.jpg', views: 7654 },
+    { product_id: 2, image_url: 'cable-1.jpg', views: 6234 },
+    { product_id: 3, image_url: 'stand-1.jpg', views: 5123 },
+    { product_id: 4, image_url: 'protector-1.jpg', views: 4567 },
+  ]);
 });
 
 // ─── Comments Analytics ───────────────────────────────────
 
 app.get('/api/comments/analytics/sentiment-summary', (c) => {
-  return c.json({
-    data: [
-      { sentiment: 'positive', count: 1234, percentage: 78 },
-      { sentiment: 'neutral', count: 158, percentage: 10 },
-      { sentiment: 'negative', count: 189, percentage: 12 },
-    ],
-  });
+  return c.json([
+    { sentiment: 'positive', count: 1234, percentage: 78 },
+    { sentiment: 'neutral', count: 158, percentage: 10 },
+    { sentiment: 'negative', count: 189, percentage: 12 },
+  ]);
 });
 
 app.get('/api/comments/analytics/top-positive', (c) => {
-  return c.json({
-    data: [
-      { id: 1, product_id: 1, text: 'Excellent quality! Highly recommended.', rating: 5 },
-      { id: 2, product_id: 2, text: 'Great value for money.', rating: 5 },
-      { id: 3, product_id: 1, text: 'Best purchase I made this year!', rating: 5 },
-    ],
-  });
+  return c.json([
+    { id: 1, product_id: 1, text: 'Excellent quality! Highly recommended.', rating: 5 },
+    { id: 2, product_id: 2, text: 'Great value for money.', rating: 5 },
+    { id: 3, product_id: 1, text: 'Best purchase I made this year!', rating: 5 },
+  ]);
 });
 
 app.get('/api/comments/analytics/top-negative', (c) => {
-  return c.json({
-    data: [
-      { id: 100, product_id: 2, text: 'Stopped working after 2 weeks.', rating: 1 },
-      { id: 101, product_id: 4, text: 'Poor quality packaging.', rating: 2 },
-      { id: 102, product_id: 3, text: 'Not as described.', rating: 2 },
-    ],
-  });
+  return c.json([
+    { id: 100, product_id: 2, text: 'Stopped working after 2 weeks.', rating: 1 },
+    { id: 101, product_id: 4, text: 'Poor quality packaging.', rating: 2 },
+    { id: 102, product_id: 3, text: 'Not as described.', rating: 2 },
+  ]);
 });
 
 app.get('/api/comments/analytics/word-frequency', (c) => {
-  return c.json({
-    data: [
-      { word: 'excellent', frequency: 234 },
-      { word: 'quality', frequency: 189 },
-      { word: 'fast', frequency: 156 },
-      { word: 'good', frequency: 145 },
-      { word: 'delivery', frequency: 123 },
-    ],
-  });
+  return c.json([
+    { word: 'excellent', frequency: 234 },
+    { word: 'quality', frequency: 189 },
+    { word: 'fast', frequency: 156 },
+    { word: 'good', frequency: 145 },
+    { word: 'delivery', frequency: 123 },
+  ]);
 });
 
 app.get('/api/comments/analytics/themes', (c) => {
-  return c.json({
-    data: [
-      { theme: 'Product Quality', mentions: 456 },
-      { theme: 'Delivery Speed', mentions: 234 },
-      { theme: 'Customer Service', mentions: 189 },
-      { theme: 'Packaging', mentions: 123 },
-    ],
-  });
+  return c.json([
+    { theme: 'Product Quality', mentions: 456 },
+    { theme: 'Delivery Speed', mentions: 234 },
+    { theme: 'Customer Service', mentions: 189 },
+    { theme: 'Packaging', mentions: 123 },
+  ]);
 });
 
 // ─── Insights ─────────────────────────────────────────────
@@ -281,12 +258,10 @@ app.post('/api/insights/ask', async (c) => {
 });
 
 app.get('/api/insights/history', (c) => {
-  return c.json({
-    data: [
-      { id: 1, question: 'Which products have the highest ROI?', answer: 'USB cables and phone stands...', created_at: '2024-03-01' },
-      { id: 2, question: 'What is my average customer satisfaction?', answer: 'Your average rating is 4.2 stars...', created_at: '2024-02-28' },
-    ],
-  });
+  return c.json([
+    { id: 1, question: 'Which products have the highest ROI?', answer: 'USB cables and phone stands...', created_at: '2024-03-01' },
+    { id: 2, question: 'What is my average customer satisfaction?', answer: 'Your average rating is 4.2 stars...', created_at: '2024-02-28' },
+  ]);
 });
 
 // ─── Health Check ─────────────────────────────────────────
