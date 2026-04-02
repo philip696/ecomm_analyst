@@ -28,10 +28,13 @@ export default function DashboardPage() {
       commentsApi.sentimentSummary(),
       engagementApi.trends(14),
     ]).then(([s, st, sent, et]) => {
-      setSummary(s.data);
-      setSalesTrend(st.data.slice(-14));
-      setSentiment(sent.data);
-      setEngagementTrend(et.data.slice(-14));
+      setSummary(s.data || {});
+      setSalesTrend(Array.isArray(st.data) ? st.data.slice(-14) : []);
+      setSentiment(Array.isArray(sent.data) ? sent.data : []);
+      setEngagementTrend(Array.isArray(et.data) ? et.data.slice(-14) : []);
+      setLoading(false);
+    }).catch((err) => {
+      console.error("Dashboard data fetch error:", err);
       setLoading(false);
     });
   }, []);
