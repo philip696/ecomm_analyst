@@ -26,7 +26,7 @@ const DEMO_USER = {
 
 app.post('/api/auth/login', async (c) => {
   try {
-    // Try to parse as JSON first, fallback to form data
+    // Parse request body
     let username = '';
     let password = '';
     
@@ -36,7 +36,8 @@ app.post('/api/auth/login', async (c) => {
       username = body.username || '';
       password = body.password || '';
     } else {
-      const body = await c.req.parseFormData();
+      // Handle form data
+      const body = await c.req.formData();
       username = body.get('username')?.toString() || '';
       password = body.get('password')?.toString() || '';
     }
