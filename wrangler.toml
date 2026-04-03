@@ -1,5 +1,0 @@
-# Cloudflare Pages configuration
-# This file is required for Pages deployments
-
-name = "marketlens-ecomm"
-pages_build_output_dir = "frontend/.next"
