@@ -126,18 +126,39 @@ app.get('/api/products/', (c) => {
 
 app.get('/api/sales/analytics/trends', (c) => {
   const days = c.req.query('days') || '30';
-  const data = [];
-  for (let i = 0; i < parseInt(days as string); i++) {
-    const date = new Date();
-    date.setDate(date.getDate() - i);
-    data.unshift({
-      date: date.toISOString().split('T')[0],
-      sales: Math.floor(Math.random() * 5000) + 1000,
-      orders: Math.floor(Math.random() * 50) + 10,
-      revenue: Math.floor(Math.random() * 50000) + 10000,
-    });
-  }
-  return c.json(data);
+  const salesData = [
+    { date: '2026-03-05', sales: 1450, orders: 42, revenue: 18500 },
+    { date: '2026-03-06', sales: 2100, orders: 58, revenue: 26200 },
+    { date: '2026-03-07', sales: 1890, orders: 51, revenue: 23400 },
+    { date: '2026-03-08', sales: 2450, orders: 67, revenue: 31200 },
+    { date: '2026-03-09', sales: 3200, orders: 88, revenue: 40100 },
+    { date: '2026-03-10', sales: 2850, orders: 76, revenue: 35600 },
+    { date: '2026-03-11', sales: 1950, orders: 54, revenue: 24200 },
+    { date: '2026-03-12', sales: 2650, orders: 73, revenue: 33100 },
+    { date: '2026-03-13', sales: 3450, orders: 95, revenue: 42800 },
+    { date: '2026-03-14', sales: 2200, orders: 60, revenue: 27500 },
+    { date: '2026-03-15', sales: 2800, orders: 77, revenue: 34900 },
+    { date: '2026-03-16', sales: 1650, orders: 46, revenue: 20600 },
+    { date: '2026-03-17', sales: 3100, orders: 85, revenue: 38700 },
+    { date: '2026-03-18', sales: 2400, orders: 65, revenue: 29800 },
+    { date: '2026-03-19', sales: 2750, orders: 74, revenue: 34200 },
+    { date: '2026-03-20', sales: 1850, orders: 50, revenue: 23000 },
+    { date: '2026-03-21', sales: 2245, orders: 61, revenue: 27900 },
+    { date: '2026-03-22', sales: 3100, orders: 85, revenue: 38600 },
+    { date: '2026-03-23', sales: 1920, orders: 53, revenue: 23800 },
+    { date: '2026-03-24', sales: 2650, orders: 72, revenue: 32900 },
+    { date: '2026-03-25', sales: 3400, orders: 93, revenue: 42200 },
+    { date: '2026-03-26', sales: 2100, orders: 57, revenue: 26100 },
+    { date: '2026-03-27', sales: 2900, orders: 79, revenue: 36000 },
+    { date: '2026-03-28', sales: 3600, orders: 99, revenue: 44700 },
+    { date: '2026-03-29', sales: 2550, orders: 70, revenue: 31600 },
+    { date: '2026-03-30', sales: 2200, orders: 61, revenue: 27300 },
+    { date: '2026-03-31', sales: 3050, orders: 84, revenue: 37800 },
+    { date: '2026-04-01', sales: 2750, orders: 75, revenue: 34000 },
+    { date: '2026-04-02', sales: 3300, orders: 91, revenue: 40900 },
+    { date: '2026-04-03', sales: 2800, orders: 77, revenue: 34600 },
+  ];
+  return c.json(salesData.slice(-parseInt(days as string)));
 });
 
 app.get('/api/sales/analytics/top-products', (c) => {
@@ -178,18 +199,23 @@ app.get('/api/sales/analytics/competitor-pricing', (c) => {
 
 app.get('/api/engagement/analytics/trends', (c) => {
   const days = c.req.query('days') || '30';
-  const data = [];
-  for (let i = 0; i < parseInt(days as string); i++) {
-    const date = new Date();
-    date.setDate(date.getDate() - i);
-    data.unshift({
-      date: date.toISOString().split('T')[0],
-      views: Math.floor(Math.random() * 10000) + 1000,
-      clicks: Math.floor(Math.random() * 500) + 50,
-      engagement_rate: (Math.random() * 10 + 2).toFixed(2),
-    });
-  }
-  return c.json(data);
+  const engagementData = [
+    { date: '2026-03-21', views: 2245, clicks: 483, engagement_rate: '11.50' },
+    { date: '2026-03-22', views: 4719, clicks: 342, engagement_rate: '8.38' },
+    { date: '2026-03-23', views: 2141, clicks: 126, engagement_rate: '4.50' },
+    { date: '2026-03-24', views: 3330, clicks: 104, engagement_rate: '2.69' },
+    { date: '2026-03-25', views: 1745, clicks: 226, engagement_rate: '7.55' },
+    { date: '2026-03-26', views: 3599, clicks: 51, engagement_rate: '5.54' },
+    { date: '2026-03-27', views: 3508, clicks: 333, engagement_rate: '10.83' },
+    { date: '2026-03-28', views: 7555, clicks: 368, engagement_rate: '11.22' },
+    { date: '2026-03-29', views: 6540, clicks: 411, engagement_rate: '6.74' },
+    { date: '2026-03-30', views: 3372, clicks: 184, engagement_rate: '2.71' },
+    { date: '2026-03-31', views: 8342, clicks: 245, engagement_rate: '9.99' },
+    { date: '2026-04-01', views: 5403, clicks: 464, engagement_rate: '5.27' },
+    { date: '2026-04-02', views: 10138, clicks: 127, engagement_rate: '4.19' },
+    { date: '2026-04-03', views: 9328, clicks: 497, engagement_rate: '3.06' },
+  ];
+  return c.json(engagementData.slice(-parseInt(days as string)));
 });
 
 app.get('/api/engagement/analytics/top-viewed', (c) => {
