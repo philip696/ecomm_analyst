@@ -100,6 +100,16 @@ app.get('/api/dashboard/summary', (c) => {
   });
 });
 
+app.get('/api/dashboard/comments', (c) => {
+  return c.json([
+    { id: 1, product_id: 1, product_name: 'Wireless Headphones', sentiment: 'positive', text: 'Excellent sound quality!', rating: 5, created_at: '2026-03-30' },
+    { id: 2, product_id: 2, product_name: 'USB-C Cable', sentiment: 'positive', text: 'Great value for money.', rating: 5, created_at: '2026-03-29' },
+    { id: 3, product_id: 3, product_name: 'Phone Stand', sentiment: 'neutral', text: 'Does what it should.', rating: 3, created_at: '2026-03-28' },
+    { id: 4, product_id: 1, product_name: 'Wireless Headphones', sentiment: 'negative', text: 'Battery died after 6 months.', rating: 2, created_at: '2026-03-27' },
+    { id: 5, product_id: 4, product_name: 'Screen Protector', sentiment: 'positive', text: 'Perfect fit, excellent protection.', rating: 5, created_at: '2026-03-26' },
+  ]);
+});
+
 // ─── Products ─────────────────────────────────────────────
 
 app.get('/api/products/', (c) => {
@@ -274,7 +284,7 @@ app.get('/debug', (c) => {
   return c.json({ 
     status: 'debug', 
     message: 'API is running',
-    routes: ['/api/auth/login', '/api/auth/register', '/api/auth/me', '/api/dashboard/summary', '/api/products/']
+    routes: ['/api/auth/login', '/api/auth/register', '/api/auth/me', '/api/dashboard/summary', '/api/dashboard/comments', '/api/products/']
   });
 });
 
