@@ -89,10 +89,14 @@ app.get('/api/auth/me', (c) => {
 
 app.get('/api/dashboard/summary', (c) => {
   return c.json({
-    total_products: 245,
-    total_sales: 125000,
+    total_revenue: 125000,
+    total_orders: 1245,
     total_returns: 12,
-    total_engagements: 5420,
+    avg_ctr: 8.5,
+    total_page_visits: 54230,
+    total_cart_adds: 8342,
+    positive_comments: 1234,
+    negative_comments: 189,
     avg_product_rating: 4.2,
     positive_sentiment_pct: 78,
     negative_sentiment_pct: 12,
