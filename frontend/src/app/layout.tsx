@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "MarketLens – E-Commerce Analytics",
   description: "Analytics platform for marketplace sellers",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon.ico",
   },
 };
 

@@ -49,13 +49,24 @@ export default function DashboardPage() {
       commentsApi.sentimentSummary(),
       engagementApi.trends(14),
     ]).then(([s, st, sent, et]) => {
-      setSummary(s.data || {});
-      setSalesTrend(Array.isArray(st.data) ? st.data.slice(-14) : []);
-      setSentiment(Array.isArray(sent.data) ? sent.data : []);
-      setEngagementTrend(Array.isArray(et.data) ? et.data.slice(-14) : []);
+      console.log("API Responses:", { 
+        summary: s.data, 
+        salesTrend: st.data, 
+        sentiment: sent.data, 
+        engagementTrend: et.data 
+      });
+      
+      setSummary(s?.data && typeof s.data === 'object' && !Array.isArray(s.data) ? s.data : {});
+      setSalesTrend(Array.isArray(st?.data) ? st.data.slice(-14) : []);
+      setSentiment(Array.isArray(sent?.data) ? sent.data : []);
+      setEngagementTrend(Array.isArray(et?.data) ? et.data.slice(-14) : []);
       setLoading(false);
     }).catch((err) => {
       console.error("Dashboard data fetch error:", err);
+      setSummary({});
+      setSalesTrend([]);
+      setSentiment([]);
+      setEngagementTrend([]);
       setLoading(false);
     });
   }, []);

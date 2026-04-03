@@ -4,11 +4,33 @@
  */
 import axios from "axios";
 
-const resolvedBaseUrl = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV !== "production" ? "http://localhost:8000" : "");
+// Detect the API URL based on environment
+function getApiUrl(): string {
+  // 1. Use explicitly set env variable (build-time)
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
 
-if (!resolvedBaseUrl) {
-  throw new Error("NEXT_PUBLIC_API_URL must be set for production builds.");
+  // 2. For local development
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:8000";
+  }
+
+  // 3. For production on Cloudflare Pages, derive Worker URL from domain
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    
+    // If deployed to ecomm-analyst.pages.dev or preview domain
+    if (hostname.includes("ecomm-analyst.pages.dev") || hostname.includes(".pages.dev")) {
+      return "https://ecomm-analyst.philip-dewanto.workers.dev";
+    }
+  }
+
+  // 4. Fallback (shouldn't reach here)
+  return "http://localhost:8000";
 }
+
+const resolvedBaseUrl = getApiUrl();
 
 const api = axios.create({
   baseURL: resolvedBaseUrl,
