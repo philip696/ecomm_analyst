@@ -216,45 +216,51 @@ app.get('/api/engagement/analytics/image-views', (c) => {
 
 app.get('/api/comments/analytics/sentiment-summary', (c) => {
   return c.json([
-    { sentiment: 'positive', count: 1234, percentage: 78 },
-    { sentiment: 'neutral', count: 158, percentage: 10 },
-    { sentiment: 'negative', count: 189, percentage: 12 },
+    { sentiment: 'positive', count: 1234, avg_rating: 4.8 },
+    { sentiment: 'neutral', count: 158, avg_rating: 3.5 },
+    { sentiment: 'negative', count: 189, avg_rating: 1.9 },
   ]);
 });
 
 app.get('/api/comments/analytics/top-positive', (c) => {
   return c.json([
-    { id: 1, product_id: 1, text: 'Excellent quality! Highly recommended.', rating: 5 },
-    { id: 2, product_id: 2, text: 'Great value for money.', rating: 5 },
-    { id: 3, product_id: 1, text: 'Best purchase I made this year!', rating: 5 },
+    { id: 1, product_id: 1, author: 'Sarah M.', text: 'Excellent quality! Highly recommended.', rating: 5 },
+    { id: 2, product_id: 2, author: 'John D.', text: 'Great value for money.', rating: 5 },
+    { id: 3, product_id: 1, author: 'Emma L.', text: 'Best purchase I made this year!', rating: 5 },
   ]);
 });
 
 app.get('/api/comments/analytics/top-negative', (c) => {
   return c.json([
-    { id: 100, product_id: 2, text: 'Stopped working after 2 weeks.', rating: 1 },
-    { id: 101, product_id: 4, text: 'Poor quality packaging.', rating: 2 },
-    { id: 102, product_id: 3, text: 'Not as described.', rating: 2 },
+    { id: 100, product_id: 2, author: 'Mike T.', text: 'Stopped working after 2 weeks.', rating: 1 },
+    { id: 101, product_id: 4, author: 'Lisa P.', text: 'Poor quality packaging.', rating: 2 },
+    { id: 102, product_id: 3, author: 'Tom R.', text: 'Not as described.', rating: 2 },
   ]);
 });
 
 app.get('/api/comments/analytics/word-frequency', (c) => {
   return c.json([
-    { word: 'excellent', frequency: 234 },
-    { word: 'quality', frequency: 189 },
-    { word: 'fast', frequency: 156 },
-    { word: 'good', frequency: 145 },
-    { word: 'delivery', frequency: 123 },
+    { word: 'excellent', count: 234 },
+    { word: 'quality', count: 189 },
+    { word: 'fast', count: 156 },
+    { word: 'good', count: 145 },
+    { word: 'delivery', count: 123 },
   ]);
 });
 
 app.get('/api/comments/analytics/themes', (c) => {
-  return c.json([
-    { theme: 'Product Quality', mentions: 456 },
-    { theme: 'Delivery Speed', mentions: 234 },
-    { theme: 'Customer Service', mentions: 189 },
-    { theme: 'Packaging', mentions: 123 },
-  ]);
+  return c.json({
+    praise_themes: [
+      { theme: 'Product Quality', count: 456 },
+      { theme: 'Delivery Speed', count: 234 },
+      { theme: 'Customer Service', count: 189 },
+    ],
+    complaint_themes: [
+      { theme: 'Packaging', count: 123 },
+      { theme: 'Battery Life', count: 98 },
+      { theme: 'Durability', count: 67 },
+    ],
+  });
 });
 
 // ─── Insights ─────────────────────────────────────────────
