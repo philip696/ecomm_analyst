@@ -27,6 +27,7 @@ export default function CommentsPage() {
     praise_themes: [],
     complaint_themes: [],
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
@@ -36,11 +37,24 @@ export default function CommentsPage() {
       commentsApi.wordFrequency(undefined, 15),
       commentsApi.themes(),
     ]).then(([p, n, s, w, t]) => {
-      setPositive(p.data);
-      setNegative(n.data);
-      setSentiment(s.data);
-      setWords(w.data);
-      setThemes(t.data);
+      console.log("Comments API responses:", { p, n, s, w, t });
+      
+      // Extract data property or use response directly if it's already an array
+      const posData = Array.isArray(p?.data) ? p.data : Array.isArray(p) ? p : [];
+      const negData = Array.isArray(n?.data) ? n.data : Array.isArray(n) ? n : [];
+      const sentData = Array.isArray(s?.data) ? s.data : Array.isArray(s) ? s : [];
+      const wordData = Array.isArray(w?.data) ? w.data : Array.isArray(w) ? w : [];
+      const themeData = t?.data || t || { praise_themes: [], complaint_themes: [] };
+
+      setPositive(posData);
+      setNegative(negData);
+      setSentiment(sentData);
+      setWords(wordData);
+      setThemes(themeData);
+      setLoading(false);
+    }).catch((err) => {
+      console.error("Comments data fetch error:", err);
+      setLoading(false);
     });
   }, []);
 
