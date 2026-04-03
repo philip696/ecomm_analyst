@@ -89,17 +89,17 @@ app.get('/api/auth/me', (c) => {
 
 app.get('/api/dashboard/summary', (c) => {
   return c.json({
-    total_revenue: 125000,
-    total_orders: 1245,
-    total_returns: 12,
+    total_revenue: 962200,
+    total_orders: 2118,
+    total_returns: 28,
     avg_ctr: 8.5,
-    total_page_visits: 54230,
-    total_cart_adds: 8342,
-    positive_comments: 1234,
-    negative_comments: 189,
-    avg_product_rating: 4.2,
-    positive_sentiment_pct: 78,
-    negative_sentiment_pct: 12,
+    total_page_visits: 184320,
+    total_cart_adds: 28380,
+    positive_comments: 4190,
+    negative_comments: 641,
+    avg_product_rating: 4.3,
+    positive_sentiment_pct: 79,
+    negative_sentiment_pct: 11,
     neutral_sentiment_pct: 10,
   });
 });
